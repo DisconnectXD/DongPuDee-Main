@@ -1,29 +1,13 @@
-import json
 import os
+import uuid
+
+from account_store import load_accounts, make_password_hash, save_accounts
 
 TITLE = "Sign Up"
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 ACCOUNTS_FILE = os.path.join(ROOT, "accounts.json")
-
-
-def load_accounts():
-    if not os.path.exists(ACCOUNTS_FILE):
-        return []
-    with open(ACCOUNTS_FILE, encoding="utf-8") as f:
-        try:
-            data = json.load(f)
-            if isinstance(data, list):
-                return data
-        except json.JSONDecodeError:
-            pass
-    return []
-
-
-def save_accounts(accounts):
-    with open(ACCOUNTS_FILE, "w", encoding="utf-8") as f:
-        json.dump(accounts, f, ensure_ascii=False, indent=2)
 
 
 def build():
@@ -52,16 +36,18 @@ def handle(form):
     if len(password) < 6:
         return "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร"
 
-    accounts = load_accounts()
+    accounts = load_accounts(ACCOUNTS_FILE)
     for account in accounts:
-        if (account.get("email", "") or "").lower() == email:
+        saved_email = (account.get("email", "") or "").strip().casefold()
+        if saved_email == email:
             return "อีเมลนี้มีคนสมัครแล้ว"
 
     accounts.append(
         {
+            "user_id": uuid.uuid4().hex,
             "full_name": full_name,
             "email": email,
-            "password": password,
+            "password_hash": make_password_hash(password),
             "phone": phone,
             "address": {
                 "street": address,
@@ -72,5 +58,5 @@ def handle(form):
             "created_at": "now",
         }
     )
-    save_accounts(accounts)
+    save_accounts(accounts, ACCOUNTS_FILE)
     return "สมัครสมาชิกสำเร็จ"

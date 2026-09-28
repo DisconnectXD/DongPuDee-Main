@@ -309,6 +309,100 @@ form.inline { display: inline; }
 .game-board { display: block; margin: 0 auto; background: #1f2933; border: 4px solid var(--maroon); border-radius: 10px; }
 .hud { display: flex; gap: 10px; justify-content: center; margin: 10px 0; }
 
+.store-filters {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 14px;
+  padding: 16px;
+  background: #121212;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+}
+.store-filters .field { margin: 0; min-width: 0; }
+.store-filters .field.search-field { grid-column: span 2; }
+.store-filters label { display: block; margin-bottom: 5px; color: #c4c4c4; font-size: 13px; }
+.store-filters input,
+.store-filters select {
+  width: 100%;
+  max-width: none;
+  min-height: 40px;
+  padding: 8px 10px;
+  color: #f5f5f5;
+  background: #1b1b1b;
+  border: 1px solid #444;
+  border-radius: 7px;
+  font: inherit;
+}
+.store-filter-actions { display: flex; gap: 8px; flex-wrap: wrap; grid-column: span 4; }
+.store-result-count { margin: 12px 0; color: var(--muted); }
+.store-empty { margin-top: 18px; }
+.store-empty h2 { margin: 0 0 6px; color: var(--ink); }
+.store-empty p { margin: 0 0 16px; }
+.auth-profile-card {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  margin: 14px 0;
+  padding: 18px;
+  color: #1f2933;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.auth-profile-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  aspect-ratio: 1;
+  color: #fff;
+  background: var(--maroon);
+  border: 3px solid var(--gold);
+  border-radius: 50%;
+  font-size: 25px;
+  font-weight: 700;
+}
+.auth-profile-info { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.auth-profile-label { color: var(--muted); font-size: 13px; }
+.auth-profile-info strong { overflow-wrap: anywhere; font-size: 17px; }
+.auth-profile-info small { overflow-wrap: anywhere; color: var(--muted); }
+.auth-profile-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+.auth-profile-actions form { margin: 0; }
+.auth-profile-actions .btn { white-space: nowrap; }
+.auth-edit-form .field input,
+.auth-edit-form .field textarea { width: 100%; max-width: 100%; }
+.auth-edit-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.account-tracking { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+.account-tracking h2 { margin: 0 0 12px; }
+.account-tracking-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 12px;
+  align-items: end;
+}
+.account-tracking-form label { grid-column: 1 / -1; color: var(--muted); font-size: 13px; }
+.account-tracking-form input { width: 100%; min-height: 40px; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 8px; font: inherit; }
+.account-tracking-result { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; margin-top: 14px; padding: 12px; background: #e6f5ec; border-left: 4px solid #1b6b3a; border-radius: 6px; }
+.account-tracking-result small { width: 100%; color: var(--muted); }
+.account-tracking-empty { margin: 12px 0 0; color: #9b1c1c; }
+@media (max-width: 720px) {
+  .store-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 12px; }
+  .store-filters .field.search-field { grid-column: span 2; }
+  .store-filter-actions { grid-column: span 2; }
+  .auth-profile-card { grid-template-columns: 52px minmax(0, 1fr); gap: 12px; padding: 14px; }
+  .auth-profile-avatar { width: 50px; font-size: 21px; }
+  .auth-profile-actions { grid-column: 1 / -1; justify-content: stretch; }
+  .auth-profile-actions form,
+  .auth-profile-actions > a { flex: 1 1 100%; }
+  .auth-profile-actions .btn { width: 100%; }
+  .account-tracking-form { grid-template-columns: 1fr; }
+  .account-tracking-form label { grid-column: auto; }
+  .account-tracking-form .btn { width: 100%; }
+}
+
 /* ---------- shirt catalog styles ---------- */
 .catalog-header {
   margin-bottom: 22px;
@@ -668,6 +762,89 @@ form.inline { display: inline; }
   color: #d0d0d0;
 }
 
+.payment-box {
+  margin-top: 16px;
+  background: #1d1d1d;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 18px;
+  color: #f5f5f5;
+}
+
+.success-box {
+  background: linear-gradient(180deg, #122d1d, #1f3b2c);
+  border-color: rgba(93, 197, 131, 0.32);
+}
+
+.payment-box h3 {
+  margin: 0 0 8px;
+  color: #fff;
+}
+
+.payment-box p {
+  margin: 0 0 14px;
+  color: #d0d0d0;
+}
+
+.status-pill {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(93, 197, 131, 0.18);
+  color: #d5f7dd;
+  border: 1px solid rgba(93, 197, 131, 0.4);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.qr-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+.qr-box img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  display: block;
+}
+
+.payment-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  color: #f0f0f0;
+}
+
+.tracking-panel { margin-top: 22px; }
+.tracking-panel h2 { margin-top: 0; }
+.tracking-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 12px;
+  align-items: end;
+}
+.tracking-form label { grid-column: 1 / -1; color: #f0f0f0; }
+.tracking-form input {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 10px;
+  color: #f5f5f5;
+  background: #1d1d1d;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  font: inherit;
+}
+.tracking-result { margin-top: 16px; }
+
 @media (max-width: 860px) {
   .detail-shell,
   .cart-layout {
@@ -676,6 +853,9 @@ form.inline { display: inline; }
 }
 
 @media (max-width: 640px) {
+  .tracking-form { grid-template-columns: 1fr; }
+  .tracking-form label { grid-column: auto; }
+  .tracking-form .btn { width: 100%; }
   .cart-line {
     grid-template-columns: 1fr;
     text-align: center;

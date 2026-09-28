@@ -45,13 +45,61 @@
     <div class="summary-row"><span>Estimated Shipping</span><strong>฿{{ shipping }}</strong></div>
     <hr>
     <div class="summary-row total"><span>Grand Total</span><strong>฿{{ total }}</strong></div>
-    <button class="btn full" type="button">Checkout</button>
+
+    {% if items %}
+      {% if checkout_open %}
+        <div class="payment-box">
+          <h3>ชำระเงิน</h3>
+          <p>สแกน QR code ด้านล่างเพื่อชำระเงิน</p>
+          <div class="qr-box">
+            <img src="/static/img/qr-placeholder.svg" alt="QR code สำหรับ QR ทดลอง">
+          </div>
+          <div class="payment-row">
+            <span>จำนวนที่ต้องชำระ</span>
+            <strong>฿{{ total }}</strong>
+          </div>
+          <div class="payment-row">
+            <span>ชื่อบัญชี</span>
+            <strong>Group 13</strong>
+          </div>
+          <form method="post">
+            <input type="hidden" name="action" value="pay">
+            <button class="btn full" type="submit">ยืนยันชำระเงิน (ทดลอง)</button>
+          </form>
+        </div>
+        <a class="btn btn-ghost full" href="/page3" style="margin-top: 12px;">กลับไปตะกร้า</a>
+      {% else %}
+        <form method="get" action="/page3" style="margin-top: 12px;">
+          <input type="hidden" name="checkout" value="1">
+          <button class="btn full" type="submit">Checkout</button>
+        </form>
+      {% endif %}
+    {% endif %}
+
     <form method="post" style="margin-top: 12px;">
       <input type="hidden" name="action" value="clear">
       <button class="btn btn-ghost full" type="submit">Clear Cart</button>
     </form>
   </aside>
 </div>
+
+<section class="cart-panel tracking-panel">
+  <h2>ตรวจสอบสถานะพัสดุ</h2>
+  <form method="get" action="/page3" class="tracking-form">
+    <label for="tracking-code">กรอกเลขพัสดุ</label>
+    <input id="tracking-code" type="text" name="track" value="{{ tracking_query }}" placeholder="เช่น PK12345678" required>
+    <button class="btn" type="submit">ค้นหาพัสดุ</button>
+  </form>
+  {% if tracking_order %}
+    <div class="payment-box success-box tracking-result">
+      <div class="payment-row"><span>เลขพัสดุ</span><strong>{{ tracking_order.tracking_code }}</strong></div>
+      <div class="payment-row"><span>สถานะ</span><strong>{{ tracking_order.status }}</strong></div>
+      <div class="payment-row"><span>วันที่สั่งซื้อ</span><strong>{{ tracking_order.created_at }}</strong></div>
+    </div>
+  {% elif tracking_query %}
+    <div class="empty-box tracking-result">ไม่พบเลขพัสดุนี้ กรุณาตรวจสอบแล้วลองอีกครั้ง</div>
+  {% endif %}
+</section>
 {% endblock %}
 
 {% block scripts %}

@@ -1,20 +1,22 @@
 import json
-import os
 
 import app as webapp
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-ACCOUNTS_FILE = os.path.join(HERE, "accounts.json")
-SESSION_FILE = os.path.join(HERE, "session.json")
+def test_signup_and_signin_flow(tmp_path, monkeypatch):
+    accounts_file = tmp_path / "accounts.json"
+    session_file = tmp_path / "session.json"
+    original_load_page = webapp.load_page
 
+    def load_page_with_test_files(name):
+        module, error = original_load_page(name)
+        if module is not None and name == "signup":
+            module.ACCOUNTS_FILE = str(accounts_file)
+        elif module is not None and name == "signin":
+            module.ACCOUNTS_FILE = str(accounts_file)
+            module.SESSION_FILE = str(session_file)
+        return module, error
 
-def setup_function():
-    for file_name in [ACCOUNTS_FILE, SESSION_FILE]:
-        if os.path.exists(file_name):
-            os.remove(file_name)
-
-
-def test_signup_and_signin_flow():
+    monkeypatch.setattr(webapp, "load_page", load_page_with_test_files)
     client = webapp.app.test_client()
 
     signup = client.post(
@@ -35,7 +37,7 @@ def test_signup_and_signin_flow():
     assert signup.status_code == 200
     assert "สมัครสมาชิกสำเร็จ" in signup_text or "Sign up" in signup_text
 
-    with open(ACCOUNTS_FILE, encoding="utf-8") as f:
+    with open(accounts_file, encoding="utf-8") as f:
         accounts = json.load(f)
     assert len(accounts) == 1
     assert accounts[0]["email"] == "somchai@example.com"
@@ -52,6 +54,6 @@ def test_signup_and_signin_flow():
     assert signin.status_code == 200
     assert "เข้าสู่ระบบสำเร็จ" in signin_text or "Sign in" in signin_text
 
-    with open(SESSION_FILE, encoding="utf-8") as f:
+    with open(session_file, encoding="utf-8") as f:
         session = json.load(f)
     assert session["email"] == "somchai@example.com"
