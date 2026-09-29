@@ -1,13 +1,15 @@
 {
   "group": {
-    "name": "Group 13",
-    "section": "SEC 04",
-    "topic": "SAINT SINNER",
+    "name": "Group 07",
+    "section": "SEC 01",
+    "topic": "SAINT SINNER streetwear storefront",
     "description": "เว็บร้านค้าเสื้อผ้า streetwear ของแบรนด์ SAINT SINNER ที่มีหน้าร้านสินค้า รายละเอียดสินค้า และตะกร้าสินค้า"
   },
   "members": [
-    {"name": "Nattaphon Khamluang", "id": "6601012345", "role": "หัวหน้ากลุ่ม", "task": "page1 · catalog"},
-    {"name": "Anan Preecha", "id": "6601012346", "role": "สมาชิก", "task": "page2 · detail"},
-    {"name": "Sarayut Inthawong", "id": "6601012347", "role": "สมาชิก", "task": "page3 · cart"}
+    {"name": "นาย ปรเมศวร์ ถวิล", "id": "69130740172", "role": "หัวหน้ากลุ่ม", "task": " สินค้า"},
+    {"name": "นาย ศิวกร แก้วมณี", "id": "69130740275", "role": "สมาชิก", "task": " โปรโมชั่น"},
+    {"name": "นาย ณัฐชนน จันทร์ผอง", "id": "69130749114", "role": "สมาชิก", "task": " สถิติ"},
+    {"name": "นาย เจษฎา เทศนา", "id": "69130740086", "role": "สมาชิก", "task": " สถิติ"}
+
   ]
 }
