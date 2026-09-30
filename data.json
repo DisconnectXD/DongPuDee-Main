@@ -5,7 +5,7 @@
     "qty": 1,
     "price": 390,
     "sizes": [
-      "Size : L"
+      "Size : XL"
     ],
     "image": "/static/images/shirt1.jpg",
     "tag": "SAINT SINNER",
@@ -20,7 +20,7 @@
     "qty": 1,
     "price": 590,
     "sizes": [
-      "Size : L"
+      "Size : XL"
     ],
     "image": "/static/images/shirt2.jpg",
     "tag": "SAINT SINNER",
@@ -35,7 +35,7 @@
     "qty": 1,
     "price": 490,
     "sizes": [
-      "Size : L"
+      "Size : XL"
     ],
     "image": "/static/images/shirt3.jpg",
     "tag": "SAINT SINNER",
@@ -65,7 +65,7 @@
     "qty": 1,
     "price": 490,
     "sizes": [
-      "Size : L"
+      "Size : XL"
     ],
     "image": "/static/images/shirt5.jpg",
     "tag": "SAINT SINNER",
@@ -80,7 +80,7 @@
     "qty": 1,
     "price": 390,
     "sizes": [
-      "Size : L"
+      "Size : XL"
     ],
     "image": "/static/images/shirt6.jpg",
     "tag": "SAINT SINNER",
